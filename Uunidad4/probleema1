@@ -1,0 +1,35 @@
+import numpy as np
+from scipy.stats import poisson
+import matplotlib.pyplot as plt
+
+# Datos del problema
+media = 5
+
+# a) ¿Cuál es la probabilidad de que el número de personas ingresadas a una unidad de cuidados intensivos en un hospital particular, en un día particular, sea dos?
+
+probabilidad_dos = poisson.pmf(2, media)
+print(f"La probabilidad de que ingresen exactamente dos personas es: {probabilidad_dos:.4f}")
+
+# b) ¿Es probable que x exceda de 10? Explicar
+
+# Calculamos la probabilidad de que x sea mayor que 10
+probabilidad_mayor_diez = 1 - poisson.cdf(10, media)
+print(f"La probabilidad de que ingresen más de diez personas es: {probabilidad_mayor_diez:.4f}")
+
+# Explicación de si es probable:
+# La probabilidad de que x exceda de 10 es {probabilidad_mayor_diez:.4f}, que es un valor
+# relativamente bajo. Esto sugiere que no es muy probable que más de 10 personas
+# ingresen a la UCI en un día, dado que la tasa promedio es de 5 personas por día.
+
+# Visualización de la distribución de Poisson
+x = np.arange(0, 15)
+pmf = poisson.pmf(x, media)
+
+plt.figure(figsize=(10, 6))
+plt.bar(x, pmf, color='skyblue')
+plt.xlabel('Número de personas ingresadas (x)')
+plt.ylabel('Probabilidad P(X=x)')
+plt.title(f'Distribución de Poisson con media = {media}')
+plt.xticks(x)
+plt.grid(axis='y', linestyle='--')
+plt.show()
