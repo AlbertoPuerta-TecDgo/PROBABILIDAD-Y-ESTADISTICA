@@ -1,0 +1,92 @@
+image.pngimage.png
+INSTITUTO TECNOLÓGICO DE DURANGO
+Probabilidad y estadística
+Unidad 5
+Practica Final. Regresión lineal y correlación.
+Quezada Puerta Jesús Alberto
+from sklearn.linear_model import LinearRegression # Modelo de regresión lineal
+import numpy as np
+
+# Datos de entrada
+periodos = [2018, 2019, 2020, 2021, 2022, 2023]
+inversion = np.array([2, 3, 5, 4, 11, 5]).reshape(-1, 1)
+ganancias = [20, 25, 34, 30, 40, 31]
+
+# Crear y entrenar el modelo de regresión lineal
+modelo = LinearRegression()
+modelo.fit(inversion, ganancias)
+
+# Predecir la ganancia para el año 2024
+ganancia_2024 = modelo.predict([[8]])
+
+print("La ganancia esperada para el año 2024 es de:", ganancia_2024[0])
+
+# Coeficientes de la regresión
+print("Coeficiente de la pendiente (m):", modelo.coef_[0])
+print("Intercepción de la recta (b):", modelo.intercept_)
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Definir tamaño de la figura
+plt.figure(figsize=(6, 4))
+
+# Datos de entrada
+inversion = [2, 3, 5, 4, 11, 5]
+ganancias = [20, 25, 34, 30, 40, 31]
+
+# Dibujar el diagrama de dispersión
+plt.scatter(x=inversion, y=ganancias)
+plt.title('Diagrama de Dispersión de Inversión vs. Ganancias')
+plt.xlabel('Inversión (millones)')
+plt.ylabel('Ganancias (millones)')
+plt.grid(True)
+plt.show()
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Definir tamaño
+plt.figure(figsize=(6, 4))
+
+# Datos de entrada
+inversion = [2, 3, 5, 4, 11, 5]
+ganancias = [20, 25, 34, 30, 40, 31]
+
+# Crear el diagrama de dispersión con línea de regresión
+sns.set(style="whitegrid")
+sns.regplot(x=inversion, y=ganancias, scatter=True, color='blue')
+plt.title('Diagrama de Dispersión con Línea de Regresión')
+plt.xlabel('Inversión (millones)')
+plt.ylabel('Ganancias (millones)')
+plt.grid(True)
+plt.show()
+import numpy as np
+from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
+
+# Datos de entrada
+publicidad = np.array([2, 3, 5, 4, 11, 5]).reshape(-1, 1)
+ganancias = np.array([20, 25, 34, 30, 40, 31])
+
+# Crear y entrenar el modelo de regresión lineal
+modelo = LinearRegression()
+modelo.fit(publicidad, ganancias)
+
+# Predecir la ganancia para una inversión de 8 en publicidad
+inversion_prediccion = np.array([[8]])
+ganancia_predicha = modelo.predict(inversion_prediccion)
+
+print(f"La ganancia esperada para una inversión de 8 en publicidad es: {ganancia_predicha[0]:.2f}")
+print("Valor de la intercepción:", modelo.intercept_)
+print("Valor de la pendiente:", modelo.coef_[0])
+
+# Crear el diagrama de dispersión con la línea de regresión
+plt.figure(figsize=(6, 5))
+plt.scatter(publicidad, ganancias, color='blue', label='Datos')
+plt.plot(publicidad, modelo.predict(publicidad), color='red', label='Línea de regresión')
+plt.scatter(inversion_prediccion, ganancia_predicha, color='green', marker='x', s=100, label=f'Predicción (8, {ganancia_predicha[0]:.2f})')
+plt.title('Pronóstico de ganancias a partir de la inversión en publicidad')
+plt.xlabel('Inversión en Publicidad (millones)')
+plt.ylabel('Ganancias Anuales (millones)')
+plt.legend()
+plt.grid(True)
+plt.show()
